@@ -3,6 +3,13 @@ import Form from "./components/home/Form/Form";
 import Layout from "./shared/components/Layout/Layout";
 import SplitScreen from "./shared/components/SplitScreen/SplitScreen";
 import "./App.css";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-PBCTSGHGNQ");
+ReactGA.send({
+  hitType: "pageview",
+  page: "window.location.pathname",
+});
 
 function App() {
   return (
