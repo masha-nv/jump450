@@ -58,7 +58,13 @@ const Form = () => {
 
   function handleFormSubmit(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(formValue);
+    const formVals = formValue;
+    // fb pixel event
+    fbq("track", "formSubmit");
+
+    // Google Tag Manager event
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "formSubmit", ...formVals });
   }
   return (
     <div className={styles.container}>
