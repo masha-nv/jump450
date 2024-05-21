@@ -2,7 +2,10 @@
 @use "@medias" as *;
 
 .layout {
-  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
   background-image: linear-gradient(
     to bottom right,
@@ -13,6 +16,7 @@
 
 .main {
   padding: 5rem;
+  padding-bottom: 0;
   height: 100%;
 }
 
