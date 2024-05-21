@@ -31,7 +31,7 @@ const Form = () => {
 
       // Google Tag Manager event
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "select_50_plus" });
+      window.dataLayer.push({ event: "50+" });
     }
   }
   return (
