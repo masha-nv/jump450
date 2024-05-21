@@ -13,48 +13,88 @@ declare global {
   }
 }
 
+type FormType = {
+  name: string;
+  email: string;
+  size: string;
+  challenges: string;
+};
+
 const Form = () => {
-  const [totalSize, setTotalSize] = useState<string>("");
+  const [formValue, setFormValue] = useState<FormType>({
+    name: "",
+    challenges: "",
+    email: "",
+    size: "",
+  });
 
-  function handleSetTotalSize(e: SyntheticEvent<HTMLSelectElement>) {
-    setTotalSize(e.currentTarget.value);
-    if (e.currentTarget.value === "50+") {
-      // google analytics event
-      ReactGA.event({
-        category: e.currentTarget.value,
-        action: "50+ selected",
-        label: "50+ selected",
-      });
+  function handleFireSizeEvent() {
+    // google analytics event
+    ReactGA.event({
+      category: "50+",
+      action: "50+ selected",
+      label: "50+ selected",
+    });
 
-      // fb pixel event
-      fbq("track", "50+");
+    // fb pixel event
+    fbq("track", "50+");
 
-      // Google Tag Manager event
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "50+" });
+    // Google Tag Manager event
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "50+" });
+  }
+
+  function handleFormValueChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
+    if (e.target.name === "size" && e.target.value === "50+") {
+      handleFireSizeEvent();
     }
+    setFormValue((val) => ({
+      ...val,
+      [e.target.name]: e.target.value,
+    }));
+  }
+
+  function handleFormSubmit(e: SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log(formValue);
   }
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleFormSubmit}>
         <div className={styles.flex}>
           <div className={styles.inputField}>
             <label htmlFor='name'>What is your name?</label>
-            <input type='text' id='name' placeholder='i.e John Ford' />
+            <input
+              type='text'
+              id='name'
+              placeholder='i.e John Ford'
+              name='name'
+              value={formValue.name}
+              onChange={handleFormValueChange}
+            />
           </div>
           <div className={styles.inputField}>
-            <label htmlFor='name'>What is your email?</label>
-            <input type='text' id='name' placeholder='Type your answer' />
+            <label htmlFor='email'>What is your email?</label>
+            <input
+              type='text'
+              name='email'
+              value={formValue.email}
+              onChange={handleFormValueChange}
+              id='email'
+              placeholder='Type your answer'
+            />
           </div>
         </div>
         <div className={styles.flex}>
           <div className={styles.inputField}>
-            <label htmlFor='name'>How large is your company?</label>
+            <label htmlFor='size'>How large is your company?</label>
             <select
-              data-fbq='select'
-              id='name'
-              value={totalSize}
-              onChange={handleSetTotalSize}>
+              id='size'
+              name='size'
+              onChange={handleFormValueChange}
+              value={formValue.size}>
               <option defaultChecked value=''>
                 Total Employee Size
               </option>
@@ -65,18 +105,21 @@ const Form = () => {
             </select>
           </div>
           <div className={styles.inputField}>
-            <label htmlFor='name'>Current Marketing Challenges</label>
+            <label htmlFor='challenges'>Current Marketing Challenges</label>
             <input
+              name='challenges'
+              onChange={handleFormValueChange}
+              value={formValue.challenges}
               type='text'
-              id='name'
+              id='challenges'
               placeholder='Choose multiple options'
             />
           </div>
         </div>
+        <div className={styles.actionButton}>
+          <GradientButton>VIEW THE PMAX OPTIMIZATION BIBLE</GradientButton>
+        </div>
       </form>
-      <div className={styles.actionButton}>
-        <GradientButton>VIEW THE PMAX OPTIMIZATION BIBLE</GradientButton>
-      </div>
 
       <div className={styles.brands}>
         <BrandsWeScaled brands={adTypeMap[AdType.Follow!]?.brands} />
