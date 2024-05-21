@@ -1,0 +1,16 @@
+@use "@colors" as *;
+@use "@mixins" as *;
+@use "@medias" as *;
+
+.button {
+  background-color: $orange;
+  @include button;
+}
+
+@media (max-width: $oneThousand) {
+  .button {
+    line-height: 1rem;
+    padding: 0.3rem 1rem;
+    font-size: 0.5rem;
+  }
+}

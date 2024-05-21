@@ -1,0 +1,54 @@
+@use "@colors" as *;
+@use "@medias" as *;
+
+.container {
+  color: $white;
+  letter-spacing: 0.1rem;
+}
+
+.brands {
+  display: flex;
+  align-items: row;
+  gap: 3rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+.icon {
+  font-size: 2rem;
+  color: $opaque-light-100;
+}
+.nav {
+  color: $orange;
+  cursor: pointer;
+}
+
+@media (max-width: $sevenHundred) {
+  .brands {
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .icon {
+    font-size: 1.5em;
+  }
+  .container {
+    h3 {
+      font-size: 1rem;
+    }
+  }
+}
+@media (max-width: $fiveHundred) {
+  .brands {
+    margin-top: 0.5rem;
+    display: block;
+  }
+  .icon {
+    font-size: 1rem;
+    padding-inline: 0.5rem;
+  }
+  .container {
+    text-align: center;
+    h3 {
+      font-size: 0.7rem;
+    }
+  }
+}

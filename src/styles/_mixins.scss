@@ -1,0 +1,13 @@
+@use "@colors" as *;
+
+@mixin button {
+  border: none;
+  outline: none;
+  line-height: 2rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.25rem;
+  color: $primary-purple;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}

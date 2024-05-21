@@ -1,0 +1,70 @@
+@use "@colors" as *;
+@use "@medias" as *;
+
+.content {
+  color: $white;
+}
+
+.orangeHighlight {
+  color: $orange;
+}
+
+.pinkHighlight {
+  color: $pink;
+}
+
+.img {
+  font-size: 10rem;
+  display: block;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-shadow: 0.125rem 0.125rem 0.625rem $dark-purple-100;
+}
+
+.helpText {
+  line-height: 1.5rem;
+}
+
+@media all and (max-width: $oneOneTwenty) {
+  .img {
+    font-size: 7rem;
+    margin-top: 1rem;
+  }
+  .title {
+    font-size: 1.2rem;
+  }
+  .helpText {
+    line-height: 1rem;
+    font-size: 0.8rem;
+  }
+}
+@media all and (max-width: $oneThousand) {
+  .img {
+    font-size: 7rem;
+    margin-top: 1rem;
+  }
+  .title {
+    font-size: 1.2rem;
+  }
+  .helpText {
+    line-height: 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media all and (max-height: $sevenHundred) {
+  .img {
+    display: none;
+  }
+  .title {
+    font-size: 1.3rem;
+  }
+  .helpText {
+    line-height: 1rem;
+    font-size: 0.8rem;
+  }
+}

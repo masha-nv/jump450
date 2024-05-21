@@ -1,0 +1,99 @@
+@use "@colors" as *;
+@use "@medias" as *;
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(4, 12.5rem);
+  gap: 5rem;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.footer {
+  background-color: $darkPurple;
+  color: $white;
+  padding: 2rem;
+  padding-inline: 8rem;
+
+  .footerItem {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .icons {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  span,
+  .icons {
+    color: $opaque-light-100;
+  }
+}
+
+.thinBorder {
+  height: 0.3rem;
+  width: 100%;
+  background-image: linear-gradient(
+    to right,
+    $pink,
+    $orange,
+    $purple,
+    $light-blue
+  );
+}
+
+.thickBorder {
+  height: 2rem;
+  width: 100%;
+  background-image: linear-gradient(
+    to right,
+    $dark-purple-100,
+    $dark-purple-400
+  );
+}
+
+@media (max-width: $oneOneTwenty) {
+  .content {
+    display: flex;
+    gap: 0.5rem;
+
+    .logo {
+      font-size: 1.5rem;
+    }
+    .footerItem {
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      align-items: center;
+    }
+    .icons {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: $sevenSixtyFive) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .logo {
+      font-size: 1rem;
+    }
+    .footerItem {
+      gap: 0.3rem;
+      font-size: 0.5rem;
+      align-items: center;
+    }
+    .icons {
+      font-size: 1rem;
+    }
+  }
+}

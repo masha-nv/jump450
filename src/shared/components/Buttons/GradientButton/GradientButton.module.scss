@@ -1,0 +1,16 @@
+@use "@colors" as *;
+@use "@mixins" as *;
+@use "@medias" as *;
+
+.button {
+  @include button;
+  padding-inline: 3rem;
+  background-image: linear-gradient(to right, $orange, $peach, $pink);
+}
+
+@media (max-width: $fiveHundred) {
+  .button {
+    font-size: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+}

@@ -1,0 +1,44 @@
+@use "@colors" as *;
+@use "@medias" as *;
+
+.nav {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  color: $white;
+
+  ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 2rem;
+    margin-left: auto;
+  }
+  .menu {
+    display: none;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: $oneThousand) {
+  .nav {
+    padding: 1rem;
+    ul {
+      font-size: 0.8rem;
+    }
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: $sevenSixtyFive) {
+  .nav {
+    ul {
+      display: none;
+    }
+    .menu {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@use "@medias" as *;
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10rem;
+  width: 100vw;
+  width: 90%;
+  margin: auto;
+}
+
+.left,
+.right {
+  flex: 1;
+}
+
+@media (max-width: $oneThousand) {
+  .container {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: $sevenHundred) {
+  .container {
+    flex-direction: column;
+  }
+}

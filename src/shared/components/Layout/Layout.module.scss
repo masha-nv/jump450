@@ -1,0 +1,23 @@
+@use "@colors" as *;
+@use "@medias" as *;
+
+.layout {
+  height: 100%;
+  position: relative;
+  background-image: linear-gradient(
+    to bottom right,
+    $primary-purple,
+    $dark-purple-100
+  );
+}
+
+.main {
+  padding: 5rem;
+  height: 100%;
+}
+
+@media (max-width: $oneSevenHundred) {
+  .main {
+    padding: 1rem;
+  }
+}
