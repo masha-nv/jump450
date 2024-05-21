@@ -32,14 +32,6 @@
       fbq("init", "775564471387017");
       fbq("track", "PageView");
       fbq("track", "View Content");
-      const element = document.querySelector('[data-fbq="select"]');
-
-      selectElement.addEventListener("change", function () {
-        if (this.value === "50+") {
-          dataLayer.push({ event: "select_50_plus" });
-          fbq("track", "50+");
-        }
-      });
     </script>
 
     <!-- End Meta Pixel Code -->

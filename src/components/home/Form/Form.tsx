@@ -6,17 +6,32 @@ import { AdType } from "../Ad/types";
 import styles from "./Form.module.scss";
 import ReactGA from "react-ga4";
 
+declare let fbq: (action: string, event: string) => void;
+declare global {
+  interface Window {
+    dataLayer: unknown[];
+  }
+}
+
 const Form = () => {
   const [totalSize, setTotalSize] = useState<string>("");
 
   function handleSetTotalSize(e: SyntheticEvent<HTMLSelectElement>) {
     setTotalSize(e.currentTarget.value);
     if (e.currentTarget.value === "50+") {
+      // google analytics event
       ReactGA.event({
         category: e.currentTarget.value,
         action: "50+ selected",
         label: "50+ selected",
       });
+
+      // fb pixel event
+      fbq("track", "50+");
+
+      // Google Tag Manager event
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "select_50_plus" });
     }
   }
   return (
