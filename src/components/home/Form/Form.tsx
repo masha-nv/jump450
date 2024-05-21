@@ -35,7 +35,11 @@ const Form = () => {
         <div className={styles.flex}>
           <div className={styles.inputField}>
             <label htmlFor='name'>How large is your company?</label>
-            <select id='name' value={totalSize} onChange={handleSetTotalSize}>
+            <select
+              data-fbq='select'
+              id='name'
+              value={totalSize}
+              onChange={handleSetTotalSize}>
               <option defaultChecked value=''>
                 Total Employee Size
               </option>
