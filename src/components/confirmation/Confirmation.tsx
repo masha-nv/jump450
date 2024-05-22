@@ -1,12 +1,26 @@
 import PrimaryButton from "../../shared/components/Buttons/PrimaryButton/PrimaryButton";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Confirmation.module.scss";
 
 const Confirmation = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const utmParams = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+  ]
+    .filter((param) => queryParams.has(param))
+    .reduce(
+      (params, param) => ({ ...params, [param]: queryParams.get(param) }),
+      {}
+    );
 
   function handleHomeClick() {
-    navigate("/");
+    navigate(`/?${new URLSearchParams(utmParams).toString()}`);
   }
   return (
     <div className={styles.container}>

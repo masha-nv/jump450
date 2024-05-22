@@ -5,7 +5,7 @@ import { adTypeMap } from "../Ad/adTypeMap";
 import { AdType } from "../Ad/types";
 import styles from "./Form.module.scss";
 import ReactGA from "react-ga4";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 declare let fbq: (action: string, event: string) => void;
 declare global {
@@ -22,6 +22,9 @@ type FormType = {
 };
 
 const Form = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState<FormType>({
     name: "",
@@ -60,6 +63,11 @@ const Form = () => {
 
   function handleFormSubmit(e: SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
+    // Create a new URL object
+    const url = new URL(
+      "https://hooks.zapier.com/hooks/catch/18932304/3v8hw53"
+    );
+
     const formVals = formValue;
     // fb pixel event
     fbq("track", "formSubmit");
@@ -68,11 +76,35 @@ const Form = () => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: "formSubmit", ...formVals });
 
-    // send form data to zapier
-    fetch(
-      `https://hooks.zapier.com/hooks/catch/18932304/3v8hw53/?name=${formVals.name}&email=${formVals.email}&size=${formVals.size}&challenges=${formVals.challenges}`
-    );
-    navigate("/confirmation");
+    // handle form values for zapier automation
+    Object.entries(formVals).forEach(([key, value]) => {
+      url.searchParams.append(key, value);
+    });
+
+    // handle utm values for zapier automation
+    const utmParams = [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_term",
+      "utm_content",
+    ]
+      .filter((param) => queryParams.has(param))
+      .reduce(
+        (params, param) => ({ ...params, [param]: queryParams.get(param) }),
+        {}
+      );
+
+    Object.entries(utmParams).forEach(([key, value]) => {
+      url.searchParams.append(key, value as string);
+    });
+
+    fetch(url.toString());
+
+    const confirmationUrl = `/confirmation?${new URLSearchParams(
+      utmParams
+    ).toString()}`;
+    navigate(confirmationUrl);
   }
   return (
     <div className={styles.container}>
