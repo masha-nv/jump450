@@ -7,11 +7,7 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  background-image: linear-gradient(
-    to bottom right,
-    $primary-purple,
-    $dark-purple-100
-  );
+  background-image: $gradient;
 }
 
 .main {

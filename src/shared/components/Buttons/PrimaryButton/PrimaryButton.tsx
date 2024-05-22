@@ -1,8 +1,14 @@
-import { PropsWithChildren } from "react";
+import { ButtonHTMLAttributes, PropsWithChildren } from "react";
 import styles from "./PrimaryButton.module.scss";
 
-const PrimaryButton = ({ children }: PropsWithChildren) => {
-  return <button className={styles.button}>{children}</button>;
+type ButtonProps = PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>;
+
+const PrimaryButton = ({ children, ...props }: ButtonProps) => {
+  return (
+    <button className={styles.button} {...props}>
+      {children}
+    </button>
+  );
 };
 
 export default PrimaryButton;

@@ -5,6 +5,7 @@ import { adTypeMap } from "../Ad/adTypeMap";
 import { AdType } from "../Ad/types";
 import styles from "./Form.module.scss";
 import ReactGA from "react-ga4";
+import { useNavigate } from "react-router-dom";
 
 declare let fbq: (action: string, event: string) => void;
 declare global {
@@ -21,6 +22,7 @@ type FormType = {
 };
 
 const Form = () => {
+  const navigate = useNavigate();
   const [formValue, setFormValue] = useState<FormType>({
     name: "",
     challenges: "",
@@ -65,6 +67,12 @@ const Form = () => {
     // Google Tag Manager event
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: "formSubmit", ...formVals });
+
+    // send form data to zapier
+    fetch(
+      `https://hooks.zapier.com/hooks/catch/18932304/3v8hw53/?name=${formVals.name}&email=${formVals.email}&size=${formVals.size}&challenges=${formVals.challenges}`
+    );
+    navigate("/confirmation");
   }
   return (
     <div className={styles.container}>

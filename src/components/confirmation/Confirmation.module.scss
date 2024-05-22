@@ -1,0 +1,8 @@
+@use "@colors" as *;
+
+.container {
+  padding: 2rem;
+  color: $white;
+  background-image: $gradient;
+  height: 100vh;
+}
